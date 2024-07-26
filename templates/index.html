@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background: url("{{ url_for('static', filename=background_image) }}") no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+    <title>Weather App</title>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ greeting }} Welcome to my Python Weather App project.</h1>
+
+        <form method="POST">
+            <input type="text" name="city" placeholder="Enter city name" required>
+            <button type="submit">Get Weather</button>
+        </form>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        {% if weather_data %}
+            <h2>Weather in {{ weather_data.city }}</h2>
+            <p>Description: {{ weather_data.description }}</p>
+            <p>Temperature: {{ weather_data.temperature }}°C</p>
+            <p>Humidity: {{ weather_data.humidity }}%</p>
+            <p>Wind Speed: {{ weather_data.wind_speed }} m/s</p>
+        {% endif %}
+    </div>
+</body>
+</html>
